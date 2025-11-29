@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد الأوامر الاحترافي للذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 مولد الأوامر الاحترافي</h1>
+    <p>اختر الإطار المناسب لطلبك، املأ الحقول، ثم انسخ الأمر الجاهز واستخدمه في منصة الذكاء الاصطناعي.</p>
+
+    <div class="form-group">
+        <label>اختر إطار العمل (نوع المهمة):</label>
+        
+        <div class="framework-selector-buttons">
+            <input type="radio" id="select_icdf" name="framework" value="ICDF" onchange="toggleFields()">
+            <label for="select_icdf">ICDF: للتحليل والبيانات والمهام المحددة</label>
+            
+            <input type="radio" id="select_rcreoc" name="framework" value="RCREOC" onchange="toggleFields()">
+            <label for="select_rcreoc">RCR EOC: للاستعانة بالذكاء الاصطناعي كوكيل أو خبير</label>
+            
+            <input type="radio" id="select_micro" name="framework" value="MICRO" onchange="toggleFields()">
+            <label for="select_micro">MICRO: لكتابة المحتوى الإبداعي والتسويقي</label>
+            
+            <input type="radio" id="select_costar" name="framework" value="COSTAR" onchange="toggleFields()">
+            <label for="select_costar">COSTAR: للحملات التسويقية والترويجية المباشرة</label>
+        </div>
+        <input type="hidden" id="frameworkValueHolder" value="">
+    </div>
+
+    <form id="promptForm">
+        
+        <div class="form-group hidden-field rcreoc_field" data-frameworks="RCREOC">
+            <label for="role">الدور (تقمص شخصية):<span class="example-hint">(مثال: أنت خبير تسويق بخبرة 10 سنوات...)</span></label>
+            <textarea id="role" placeholder="حدد الدور الذي يجب أن يتقمصه الذكاء الاصطناعي."></textarea>
+        </div>
+        
+        <div class="form-group hidden-field rcreoc_field" data-frameworks="RCREOC">
+            <label for="examples">الأمثلة (لتوضيح النتيجة المطلوبة):<span class="example-hint">(مثال: إذا كان التقرير به مشكلة (س)، فاقترح الحل (ص)...)</span></label>
+            <textarea id="examples" placeholder="قدم مثالاً للتطبيق المطلوب أو النتيجة المثالية."></textarea>
+        </div>
+        
+        <div class="form-group hidden-field rcreoc_field cost_field" data-frameworks="RCREOC COSTAR">
+            <label for="constraints">القيود أو الإجراء المطلوب:<span class="example-hint">(مثال: يجب ألا يتجاوز النص 50 كلمة، أو الإجراء: اطلب من القارئ الضغط على زر الشراء...)</span></label>
+            <textarea id="constraints" placeholder="حدد القواعد والقيود أو الإجراء المطلوب من القارئ."></textarea>
+        </div>
+
+        <div class="form-group hidden-field icdf_field micro_field rcreoc_field cost_field" data-frameworks="ICDF RCREOC MICRO COSTAR">
+            <label for="context">السياق والخلفية (لماذا، ومن هو الجمهور؟):<span class="example-hint">(مثال: الجمهور هم طلبة جامعات، أو الهدف هو تقرير داخلي...)</span></label>
+            <textarea id="context" placeholder="حدد الخلفية، الجمهور المستهدف، والقناة التي سيُنشر عليها المحتوى."></textarea>
+        </div>
+        
+        <div class="form-group hidden-field icdf_field micro_field rcreoc_field" data-frameworks="ICDF RCREOC MICRO">
+            <label for="request">الطلب والتعليمات الأساسية:<span class="example-hint">(مثال: حلل بيانات المبيعات، أو اكتب سكريبت فيديو...)</span></label>
+            <textarea id="request" placeholder="ما هي المهمة المحددة التي يجب على الذكاء الاصطناعي تنفيذها؟"></textarea>
+        </div>
+        
+        <div class="form-group hidden-field icdf_field" data-frameworks="ICDF">
+            <label for="data">البيانات (المعلومات التي سيعمل عليها الذكاء الاصطناعي):<span class="example-hint">(مثال: البيانات تشمل أعمدة 'اسم المنتج' و 'قيمة المبيعات'...)</span></label>
+            <textarea id="data" placeholder="قم بإدراج البيانات أو تحديد نوع البيانات."></textarea>
+        </div>
+
+        <div class="form-group hidden-field micro_field" data-frameworks="MICRO">
+            <label for="message">الرسالة الجوهرية (ماذا تريد أن تقول؟):<span class="example-hint">(مثال: أهمية التعلم الذاتي للخريجين الجدد.)</span></label>
+            <textarea id="message" placeholder="حدد الفكرة الجوهرية والرسالة الأساسية."></textarea>
+        </div>
+        
+        <div class="form-group hidden-field micro_field" data-frameworks="MICRO">
+            <label for="intention">الهدف (ماذا تريد من القارئ أن يفعل؟):<span class="example-hint">(مثال: إقناع القارئ بالاشتراك في النشرة البريدية.)</span></label>
+            <textarea id="intention" placeholder="ما هي النتيجة التي تريد تحقيقها من هذا المحتوى؟"></textarea>
+        </div>
+        
+        <div class="form-group hidden-field micro_field" data-frameworks="MICRO">
+            <label for="rhythmStyle">الإيقاع والأسلوب (النبرة المستخدمة):<span class="example-hint">(مثال: أسلوب مُحفز ومرح بنبرة ودودة.)</span></label>
+            <textarea id="rhythmStyle" placeholder="حدد النبرة، والمشاعر، وشكل اللغة المستخدمة في النص."></textarea>
+        </div>
+
+        <div class="form-group hidden-field cost_field" data-frameworks="COSTAR">
+            <label for="offer">العرض أو المنتج:<span class="example-hint">(مثال: خصم 25% على جميع المنتجات لمدة 48 ساعة فقط.)</span></label>
+            <textarea id="offer" placeholder="ما هو المنتج أو الخدمة أو الخصم الذي يتم تقديمه؟"></textarea>
+        </div>
+        
+        <div class="form-group hidden-field cost_field" data-frameworks="COSTAR">
+            <label for="styleCostar">الأسلوب التسويقي:<span class="example-hint">(مثال: أسلوب أنيق ومُقنع بلمسة من الفخامة.)</span></label>
+            <textarea id="styleCostar" placeholder="حدد النمط التسويقي المطلوب للمحتوى."></textarea>
+        </div>
+        
+        <div class="form-group hidden-field cost_field" data-frameworks="COSTAR">
+            <label for="target">الجمهور المستهدف (من هو عميلك؟):<span class="example-hint">(مثال: سيدات بين 25-45 سنة مهتمات بالتنظيف الذكي.)</span></label>
+            <textarea id="target" placeholder="من هو العميل المثالي الذي توجه له الرسالة؟"></textarea>
+        </div>
+        
+        <div class="form-group hidden-field cost_field" data-frameworks="COSTAR">
+            <label for="result">النتيجة المرجوة من الحملة:<span class="example-hint">(مثال: تحقيق 75% من التسجيلات المستهدفة خلال الأسبوع الأول.)</span></label>
+            <textarea id="result" placeholder="ما هو الهدف النهائي أو النتيجة المرجوة من هذه الحملة؟"></textarea>
+        </div>
+        
+        <div class="form-group hidden-field icdf_field rcreoc_field micro_field cost_field" data-frameworks="ICDF RCREOC MICRO COSTAR">
+            <label for="formatOutput">التنسيق النهائي (شكل الإخراج المطلوب):<span class="example-hint">(مثال: أريد جدولاً من ثلاثة أعمدة، أو مُقسماً إلى مقدمة وجسم وخاتمة...)</span></label>
+            <textarea id="formatOutput" placeholder="حدد التنسيق النهائي الذي يجب أن يكون عليه الرد."></textarea>
+        </div>
+    
+        <button type="button" onclick="generatePrompt()">توليد الأمر الاحترافي</button>
+    </form>
+
+    <div class="prompt-output-area">
+        <label for="generatedPrompt">الأمر المُولد (جاهز للنسخ واللصق):</label>
+        <textarea id="generatedPrompt" readonly placeholder="سيظهر الأمر الاحترافي الذي تم تجميعه هنا..." rows="10"></textarea>
+        
+        <div class="action-buttons">
+            <button type="button" class="action-btn copy-btn" onclick="copyPrompt()">📋 نسخ الأمر</button>
+            <button type="button" class="action-btn export-btn" onclick="exportPrompt()">💾 تصدير (TXT)</button>
+            <button type="button" class="action-btn clear-btn" onclick="clearForm()">🗑️ مسح الكل</button>
+            <button type="button" class="action-btn print-btn" onclick="printPrompt()">🖨️ طباعة</button>
+            <button type="button" class="action-btn share-btn" onclick="sharePrompt()">🔗 مشاركة</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js" defer></script> 
+</body>
+</html>
